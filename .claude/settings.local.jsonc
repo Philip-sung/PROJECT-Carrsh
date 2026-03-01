@@ -1,0 +1,111 @@
+{
+  // =======================================================================================
+  // ClaudeCode 권한설정 _ 2026.02.24 Philip Sung
+  // 원칙: 파일 수정은 자유, 단 git에 영구 기록(stage/commit)은 금지
+  // → unstaged 상태를 유지하면 git checkout/restore로 언제든 되돌릴 수 있음
+  // =======================================================================================
+  "permissions": {
+    // ============================================================
+    // ALLOW: 인가 없이 자동 실행되는 작업들
+    // ============================================================
+    "allow": [
+      // --- 파일 읽기/탐색 ---
+      "Read(**)",
+      "Bash(cat:*)",
+      "Bash(ls:*)",
+      "Bash(find:*)",
+      "Bash(tree:*)",
+      "Bash(head:*)",
+      "Bash(tail:*)",
+      "Bash(pwd:*)",
+      "Bash(cd:*)",
+      "Bash(which:*)",
+      "Bash(env:*)",
+
+      // --- 텍스트 검색/처리 ---
+      "Bash(grep:*)",
+      "Bash(awk:*)",
+      "Bash(sed:*)",
+      "Bash(sort:*)",
+      "Bash(uniq:*)",
+      "Bash(wc:*)",
+      "Bash(diff:*)",
+      "Bash(echo:*)",
+      "Bash(printf:*)",
+
+      // --- 파일 조작 (unstaged 상태이므로 git restore로 되돌릴 수 있음) ---
+      "Bash(cp:*)",
+      "Bash(mv:*)",
+      "Bash(rm:*)",
+      "Bash(mkdir:*)",
+      "Bash(touch:*)",
+      "Bash(chmod:*)",
+
+      // --- 개발 도구 (빌드/린트/테스트/패키지) ---
+      "Bash(python:*)",
+      "Bash(python3:*)",
+      "Bash(node:*)",
+      "Bash(npx:*)",
+      "Bash(npm:*)",
+      "Bash(yarn:*)",
+      "Bash(pnpm:*)",
+      "Bash(tsc:*)",
+      "Bash(eslint:*)",
+      "Bash(prettier:*)",
+      "Bash(jest:*)",
+      "Bash(vitest:*)",
+      "Bash(curl:*)",
+
+      // --- Git 읽기 전용 (조회/검색) ---
+      "Bash(git status:*)",
+      "Bash(git log:*)",
+      "Bash(git diff:*)",
+      "Bash(git show:*)",
+      "Bash(git branch:*)",
+      "Bash(git blame:*)",
+      "Bash(git reflog:*)",
+      "Bash(git ls-files:*)",
+      "Bash(git rev-parse:*)",
+
+      // --- Git 되돌리기 (unstaged 변경 복원용) ---
+      "Bash(git checkout:*)",
+      "Bash(git switch:*)",
+      "Bash(git restore:*)",
+      "Bash(git reset:*)",
+      "Bash(git stash:*)",
+      "Bash(git clean:*)",
+
+      // --- 셸 제어 구문 ---
+      "Bash(for:*)",
+      "Bash(do:*)",
+      "Bash(done:*)",
+      "Bash(if:*)",
+      "Bash(then:*)",
+      "Bash(else:*)",
+      "Bash(fi:*)",
+      "Bash(file=:*)",
+    ],
+
+    // ============================================================
+    // DENY: 영구적 변경을 만드는 작업 (반드시 사용자 승인 필요)
+    // ============================================================
+    "deny": [
+      // --- Git 스테이징/커밋 (영구 기록 금지) ---
+      "Bash(git add:*)", // 변경사항 스테이징
+      "Bash(git commit:*)", // 커밋 생성
+      "Bash(git merge:*)", // 머지 커밋 생성
+      "Bash(git rebase:*)", // 히스토리 재작성
+      "Bash(git cherry-pick:*)", // 커밋 복제
+      "Bash(git tag:*)", // 태그 생성
+      "Bash(git rm:*)", // 삭제 + 자동 스테이징
+      "Bash(git mv:*)", // 이동 + 자동 스테이징
+
+      // --- Git 원격 (원격 저장소 접근) ---
+      "Bash(git push:*)", // 원격에 코드 올리기
+      "Bash(git pull:*)", // 원격에서 코드 받기
+      "Bash(git fetch:*)", // 원격 정보 가져오기
+      "Bash(git remote:*)", // 원격 저장소 설정 변경
+      "Bash(git clone:*)", // 원격 저장소 복제
+    ],
+  },
+}
