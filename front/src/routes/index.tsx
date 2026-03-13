@@ -5,7 +5,7 @@ import { PostModifyScreen } from "../screens/PostModifyScreen";
 import { AddProjectScreen } from "../screens/AddProjectScreen";
 import App from "../App";
 
-const pServerRouter = createBrowserRouter([
+const carrshRouter = createBrowserRouter([
   {
     path: "",
     element: <App />,
@@ -32,4 +32,4 @@ const pServerRouter = createBrowserRouter([
   },
 ]);
 
-export { pServerRouter };
+export { carrshRouter };

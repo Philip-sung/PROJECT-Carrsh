@@ -1,20 +1,20 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: pserver-web-deployment
+  name: carrsh-web-deployment
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: pserver-web-pod
+      app: carrsh-web-pod
   template:
     metadata:
       labels:
-        app: pserver-web-pod
+        app: carrsh-web-pod
     spec:
       containers:
-      - name: pserver-web
-        image: philipsung/pserver-web-image:latest
+      - name: carrsh-web
+        image: philipsung/carrsh-web-image:latest
         imagePullPolicy: Always
         ports:
         - containerPort: 80

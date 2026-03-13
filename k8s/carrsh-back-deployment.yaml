@@ -1,23 +1,23 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: pserver-back-deployment
+  name: carrsh-back-deployment
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: pserver-back-pod
+      app: carrsh-back-pod
   template:
     metadata:
       labels:
-        app: pserver-back-pod
+        app: carrsh-back-pod
     spec:
       containers:
-      - name: pserver-back
-        image: philipsung/pserver-back-image:latest
+      - name: carrsh-back
+        image: philipsung/carrsh-back-image:latest
         imagePullPolicy: Always
         ports:
         - containerPort: 3000
         envFrom:
         - secretRef:
-            name: pserver-back-env
+            name: carrsh-back-env

@@ -3,7 +3,7 @@ import ReactDOM from "react-dom/client";
 import "./index.css";
 import reportWebVitals from "./reportWebVitals";
 import { RouterProvider } from "react-router-dom";
-import { pServerRouter } from "./routes";
+import { carrshRouter } from "./routes";
 // @ts-ignore - ServiceInformation.js is git-ignored
 import Info from "./ServiceInformation";
 import { ApolloClient, InMemoryCache, ApolloProvider } from "@apollo/client";
@@ -18,7 +18,7 @@ const root = ReactDOM.createRoot(
 );
 root.render(
   <ApolloProvider client={client}>
-    <RouterProvider router={pServerRouter} />
+    <RouterProvider router={carrshRouter} />
   </ApolloProvider>
 );
 

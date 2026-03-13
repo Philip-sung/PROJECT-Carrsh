@@ -1,10 +1,10 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: pserver-web-service
+  name: carrsh-web-service
 spec:
   selector:
-    app: pserver-web-pod
+    app: carrsh-web-pod
   ports:
   - protocol: TCP
     port: 80
