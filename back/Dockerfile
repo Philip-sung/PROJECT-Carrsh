@@ -21,7 +21,7 @@ COPY package.json ./
 RUN npm install --legacy-peer-deps
 
 COPY . .
-RUN npm run build
+RUN npm run build && cp ServiceInformation.js dist/
 
 EXPOSE 3000
 
