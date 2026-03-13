@@ -2,7 +2,6 @@ import { Document } from "mongoose";
 
 // Mongoose Document Interfaces
 export interface IAuth {
-  _id?: string;
   userID: string;
   userPW: string;
   userName: string;
@@ -14,7 +13,6 @@ export interface IAuth {
 export interface IAuthDocument extends IAuth, Document {}
 
 export interface IPost {
-  _id?: string;
   postTitle: string;
   postContent: string;
   postDate: string;
@@ -27,7 +25,6 @@ export interface IPost {
 export interface IPostDocument extends IPost, Document {}
 
 export interface IProject {
-  _id?: string;
   title?: string;
   designer?: string;
   status?: string;
@@ -48,7 +45,6 @@ export interface IProject {
 export interface IProjectDocument extends IProject, Document {}
 
 export interface INotice {
-  _id?: string;
   project?: string;
   title?: string;
   from?: string;
@@ -60,7 +56,6 @@ export interface INotice {
 export interface INoticeDocument extends INotice, Document {}
 
 export interface ISchedule {
-  _id?: string;
   project?: string;
   createdTime?: string;
   startTime?: string;
@@ -73,7 +68,6 @@ export interface ISchedule {
 export interface IScheduleDocument extends ISchedule, Document {}
 
 export interface ILog {
-  _id?: string;
   logTime: string;
   log: string;
 }
