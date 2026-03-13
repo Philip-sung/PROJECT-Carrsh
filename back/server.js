@@ -21,13 +21,13 @@ const __dirname = path.dirname(__filename);
 await server.start(console.log('[INIT]Apollo server started successfully'));
 server.applyMiddleware({app});
 
-app.set('port', 3000)
+app.set('port', Info.port)
 
 app.use(express.static(path.join(__dirname, '../front/build')));
 app.use(express.json()); 
 app.use(express.urlencoded( {extended : false } ));
 app.use(session({
-    secret: Info.encryptKey,
+    secret: Info.sessionSecret,
     resave: false,
     saveUninitialized: true,
     store: new MemoryStore({
@@ -40,7 +40,7 @@ app.use(session({
 
 //!START! : CORS CODE FOR TEST ENVIRONMENT
 app.use(cors({
-    origin: "http://localhost:3001",
+    origin: Info.corsOrigin,
     methods: ["POST", "PUT", "GET", "OPTIONS", "HEAD"],
     credentials: true,
 }));

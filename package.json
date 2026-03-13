@@ -5,7 +5,21 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-		"start": "concurrently \"cd ./back && npm run server\" \"cd ./front && npm start\""
+    "start": "concurrently \"cd ./back && npm run server\" \"cd ./front && npm start\"",
+
+    "docker:build:back": "docker build -t pserver-back-image back/",
+    "docker:build:web": "cd front && docker build -t pserver-web-image .",
+    "docker:push:back": "docker tag pserver-back-image:latest philipsung/pserver-back-image:latest && docker push philipsung/pserver-back-image:latest",
+    "docker:push:web": "docker tag pserver-web-image:latest philipsung/pserver-web-image:latest && docker push philipsung/pserver-web-image:latest",
+
+    "kube:secrets": "kubectl create secret generic pserver-back-env --from-env-file=back/.env.production --dry-run=client -o yaml | kubectl apply -f -",
+    "kube:apply:back": "kubectl apply -f k8s/pserver-back-deployment.yaml && kubectl apply -f k8s/pserver-back-service.yaml",
+    "kube:apply:web": "kubectl apply -f k8s/pserver-web-deployment.yaml && kubectl apply -f k8s/pserver-web-service.yaml",
+    "kube:apply:all": "npm run kube:secrets && npm run kube:apply:back && npm run kube:apply:web",
+
+    "deploy:back": "npm run docker:build:back && npm run docker:push:back && npm run kube:apply:back",
+    "deploy:web": "npm run docker:build:web && npm run docker:push:web && npm run kube:apply:web",
+    "deploy:all": "npm run kube:secrets && npm run deploy:back && npm run deploy:web"
   },
   "author": "",
   "license": "ISC",
