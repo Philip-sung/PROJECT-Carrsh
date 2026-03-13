@@ -1,7 +1,6 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
 import "./index.css";
-import reportWebVitals from "./reportWebVitals";
 import { RouterProvider } from "react-router-dom";
 import { carrshRouter } from "./routes";
 // @ts-ignore - ServiceInformation.js is git-ignored
@@ -21,5 +20,3 @@ root.render(
     <RouterProvider router={carrshRouter} />
   </ApolloProvider>
 );
-
-reportWebVitals();

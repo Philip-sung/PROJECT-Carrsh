@@ -21,7 +21,7 @@ interface CreateScheduleButtonProps {
 }
 
 interface DisplayerWorkMapProps {
-  function: (param?: string) => void;
+  function: (param: string) => void;
 }
 
 const Reservation = observer(({ store }: { store: typeof timeStoreObj }) => {

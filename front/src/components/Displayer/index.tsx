@@ -9,7 +9,7 @@ interface DisplayerProps {
   imgTxt?: string;
   LinkTo?: string;
   action?: string;
-  function?: (param?: string) => void;
+  function?: (param: string) => void;
   parameter?: string;
 }
 
@@ -23,7 +23,7 @@ function Displayer(props: DisplayerProps): JSX.Element {
   const onImgText = props.imgTxt;
   const link = props.LinkTo;
   const action = props.action;
-  let userFunction: (param?: string) => void = () => { alert("Action Not defined"); };
+  let userFunction: (param: string) => void = () => { alert("Action Not defined"); };
   const parameter = props.parameter;
 
   if (action === "Link") {
@@ -66,7 +66,7 @@ function Displayer(props: DisplayerProps): JSX.Element {
 
   return (
     <TransitionObject>
-      <div className="Displayer" onClick={() => { userFunction(parameter); }}>
+      <div className="Displayer" onClick={() => { userFunction(parameter ?? ""); }}>
         <img className="DisplayerImg" src={`/thumbnail/${projectImg}.png`} onError={handleImgError} alt="DisplayerImg" />
         <div className="onImgText">{onImgText}</div>
         <div className="DisplayDescription">
