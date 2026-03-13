@@ -1,0 +1,9 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(npm install typescript tsx @types/node @types/express @types/cors @types/express-session @types/crypto-js --save-dev)",
+      "Bash(npm uninstall apollo-boost react-apollo crypto)",
+      "Bash(npm install typescript tsx @types/node @types/express @types/cors @types/express-session @types/crypto-js --save-dev --legacy-peer-deps)"
+    ]
+  }
+}
