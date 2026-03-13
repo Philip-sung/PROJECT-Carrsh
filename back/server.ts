@@ -1,13 +1,15 @@
 // External Imports
-import express, { Request, Response } from "express";
 import path from "path";
 import { fileURLToPath } from "url";
+import express, { Request, Response } from "express";
 import { ApolloServer } from "apollo-server-express";
 import "./config/database.js";
 import typeDefs from "./modules/graphql/graphqlSchema.js";
 import resolvers from "./modules/graphql/resolvers.js";
 import session from "express-session";
 import cors from "cors";
+
+const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
 // @ts-ignore - ServiceInformation.js is git-ignored, typed via .d.ts
 import Info from "./ServiceInformation.js";
@@ -29,8 +31,6 @@ const MemoryStore = createMemoryStore(session);
 
 const server = new ApolloServer({ typeDefs, resolvers });
 const app = express();
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
 
 await server.start();
 console.log("[INIT]Apollo server started successfully");
@@ -38,7 +38,6 @@ server.applyMiddleware({ app: app as any });
 
 app.set("port", 3000);
 
-app.use(express.static(path.join(__dirname, "../front/build")));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(
@@ -55,7 +54,7 @@ app.use(
   })
 );
 
-// CORS for test environment
+// CORS for local dev (front dev server on :3001)
 app.use(
   cors({
     origin: "http://localhost:3001",
@@ -63,10 +62,6 @@ app.use(
     credentials: true,
   })
 );
-
-app.get("/", (_req: Request, res: Response) => {
-  res.sendFile(path.join(__dirname, "../../front/build/particleDrop.html"));
-});
 
 app.post("/setLoginInfo", (req: Request, res: Response) => {
   req.session.user = req.body;
@@ -82,6 +77,15 @@ app.get("/logout", (req: Request, _res: Response) => {
   req.session.destroy((err) => {
     if (err) console.error(err);
   });
+});
+
+// Serve frontend static files
+const publicPath = path.join(__dirname, "public");
+app.use(express.static(publicPath));
+
+// SPA fallback: non-API routes serve index.html
+app.get("*", (_req: Request, res: Response) => {
+  res.sendFile(path.join(publicPath, "index.html"));
 });
 
 app.listen(app.get("port"), () => {

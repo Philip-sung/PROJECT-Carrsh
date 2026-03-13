@@ -6,14 +6,10 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "concurrently \"cd ./back && npm run server\" \"cd ./front && npm start\"",
-    "docker:build:back": "docker build -t carrsh-back-image back/",
-    "docker:build:web": "cd front && docker build -t carrsh-web-image .",
-    "docker:push:back": "docker tag carrsh-back-image:latest philipsung/carrsh-back-image:latest && docker push philipsung/carrsh-back-image:latest",
-    "docker:push:web": "docker tag carrsh-web-image:latest philipsung/carrsh-web-image:latest && docker push philipsung/carrsh-web-image:latest",
+    "docker:build": "docker build -t carrsh-image .",
+    "docker:push": "docker tag carrsh-image:latest philipsung/carrsh-image:latest && docker push philipsung/carrsh-image:latest",
     "kube:secrets": "kubectl create secret generic carrsh-back-env --from-env-file=back/.env.production --dry-run=client -o yaml | kubectl apply -f -",
-    "kube:deploy:back": "npm run docker:build:back && npm run docker:push:back && kubectl apply -f k8s/carrsh-back-deployment.yaml && kubectl apply -f k8s/carrsh-back-service.yaml && kubectl rollout restart deployment carrsh-back-deployment",
-    "kube:deploy:web": "npm run docker:build:web && npm run docker:push:web && kubectl apply -f k8s/carrsh-web-deployment.yaml && kubectl apply -f k8s/carrsh-web-service.yaml && kubectl rollout restart deployment carrsh-web-deployment",
-    "kube:deploy:all": "npm run kube:secrets && npm run kube:deploy:back && npm run kube:deploy:web"
+    "kube:deploy": "npm run docker:build && npm run docker:push && kubectl apply -f k8s/carrsh-back-deployment.yaml && kubectl apply -f k8s/carrsh-back-service.yaml && kubectl rollout restart deployment carrsh-back-deployment"
   },
   "author": "",
   "license": "ISC",

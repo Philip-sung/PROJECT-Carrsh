@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
       - name: carrsh-back
-        image: philipsung/carrsh-back-image:latest
+        image: philipsung/carrsh-image:latest
         imagePullPolicy: Always
         ports:
         - containerPort: 3000
