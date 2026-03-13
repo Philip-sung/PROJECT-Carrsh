@@ -80,7 +80,7 @@ app.get("/logout", (req: Request, _res: Response) => {
 });
 
 // Serve frontend static files
-const publicPath = path.join(__dirname, "public");
+const publicPath = path.join(__dirname, "..", "public");
 app.use(express.static(publicPath));
 
 // SPA fallback: non-API routes serve index.html
