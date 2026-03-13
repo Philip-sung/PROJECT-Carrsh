@@ -65,11 +65,7 @@ app.use(
 );
 
 app.get("/", (_req: Request, res: Response) => {
-  res.send(
-    express.static(
-      path.join(__dirname, "../../front/build/particleDrop.html")
-    ) as any
-  );
+  res.sendFile(path.join(__dirname, "../../front/build/particleDrop.html"));
 });
 
 app.post("/setLoginInfo", (req: Request, res: Response) => {
